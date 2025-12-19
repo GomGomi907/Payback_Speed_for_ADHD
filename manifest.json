@@ -1,0 +1,45 @@
+{
+    "manifest_version": 3,
+    "name": "유튜브 맞춤 속도 조절기",
+    "version": "1.0",
+    "description": "음악은 정속, 영상은 기본 2배속(설정 가능). 단축키로 제어하는 스마트 속도 조절기.",
+    "permissions": [
+        "storage"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.youtube.com/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "inject.js"
+            ],
+            "matches": [
+                "*://*.youtube.com/*"
+            ]
+        }
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "속도 설정"
+    },
+    "commands": {
+        "toggle-speed": {
+            "suggested_key": {
+                "default": "Alt+Shift+S"
+            },
+            "description": "속도 조절 기능 켜기/끄기"
+        }
+    }
+}

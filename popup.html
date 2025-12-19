@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { width: 220px; padding: 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f9f9f9; }
+    h3 { margin-top: 0; margin-bottom: 15px; font-size: 16px; color: #333; }
+    .control { margin-bottom: 20px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: #555; }
+    input[type="number"] { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ddd; border-radius: 4px; }
+    input[type="number"]:focus { border-color: #4285f4; outline: none; }
+    .status-container { display: flex; align-items: center; justify-content: space-between; }
+    .status { font-weight: bold; font-size: 14px; }
+    .status.on { color: #34a853; }
+    .status.off { color: #ea4335; }
+    button#toggleBtn {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: background 0.2s;
+    }
+    button#toggleBtn.btn-on { background-color: #ffebee; color: #c62828; } /* Style for "Turn Off" */
+    button#toggleBtn.btn-off { background-color: #e8f5e9; color: #2e7d32; } /* Style for "Turn On" */
+    
+    .hint { font-size: 11px; color: #888; margin-top: 10px; text-align: center; }
+    kbd { background: #eee; padding: 2px 4px; border-radius: 3px; font-family: monospace; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <h3>🚀 재생 속도 설정</h3>
+  
+  <div class="control status-container">
+    <div>
+      <label style="margin:0">기능 상태</label>
+      <span id="statusText" class="status">--</span>
+    </div>
+    <button id="toggleBtn">전환</button>
+  </div>
+
+  <div class="control">
+    <label for="maxSpeed">영상 기본 속도 (최대)</label>
+    <div style="display: flex; align-items: center; gap: 5px;">
+        <input type="number" id="maxSpeed" step="0.25" min="0.25" max="16.0">
+        <span style="font-size: 12px; color: #666;">배속</span>
+    </div>
+  </div>
+
+  <div class="hint">단축키: <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd></div>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -52,6 +52,24 @@
             // B. Native Category Check
             const category = data.microformat?.playerMicroformatRenderer?.category;
             if (category === 'Music') {
+                // EXCEPTION: Check for "BGM" / "background music" usage in description.
+                // Many YouTubers use background music and credit it in the description,
+                // causing YouTube to categorize the video as "Music".
+                // We want to skip these unless it's a real music video.
+                const description = (data.videoDetails?.shortDescription || '').toLowerCase();
+                const bgmKeywords = [
+                    'music provided by', '브금대통령',
+                    '배경음악', 'bgm',
+                    'music by'
+                ];
+
+                const isBgmUsage = bgmKeywords.some(k => description.includes(k));
+
+                if (isBgmUsage) {
+                    console.log('[SpeedController] Detected: Category is Music, BUT found BGM credits. Treating as VIDEO.');
+                    return 'video';
+                }
+
                 console.log('[SpeedController] Detected: Native Music Category');
                 return 'music';
             }
